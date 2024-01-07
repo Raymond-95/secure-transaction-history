@@ -6,6 +6,11 @@ export const fonts = StyleSheet.create({
         fontWeight: 'bold',
         fontStyle: 'normal'
     },
+    heading2: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        fontStyle: 'normal'
+    },
     regular: {
         fontSize: 18,
         fontWeight: 'normal',

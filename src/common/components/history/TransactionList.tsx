@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, FlatList } from 'react-native'
 
+import { NavigationService } from 'services/navigation/NavigationService'
+
 import { TransactionData } from 'mock/transactionData'
 import { TransctionType } from 'models'
 import { palettes, fonts } from 'common/theme';
+
+const currency = 'RM'
 
 export const TransactionList = () => {
     return (
@@ -17,16 +21,22 @@ export const TransactionList = () => {
 }
 
 const Item = ({ item }) => (
-    <TouchableOpacity style={styles.itemContainer} onPress={() => {}}>
-        <View style={styles.leftContainer}>
-            <Text style={fonts.regularBoldTitle}>{item.recipient_name}</Text>
-            <View style={[styles.typeContainer, item.type === 'debit' ? { backgroundColor: palettes.red } : { backgroundColor: palettes.green }]}>
-                <Text style={[fonts.regular, styles.typeStyle]}>{item.type}</Text>
+    <TouchableOpacity style={styles.itemContainer}
+        activeOpacity={0.5}
+        onPress={() => {
+            NavigationService.navigate('TransctionDetails', { details: item })
+        }}>
+        <>
+            <View style={styles.leftContainer}>
+                <Text style={fonts.regularBoldTitle}>{item.recipient_name}</Text>
+                <View style={[styles.typeContainer, item.type === 'debit' ? { backgroundColor: palettes.red } : { backgroundColor: palettes.green }]}>
+                    <Text style={[fonts.regular, styles.typeStyle]}>{item.type}</Text>
+                </View>
             </View>
-        </View>
-        <View style={styles.rightContainer}>
-            <Text style={fonts.regular}>{item.amount}</Text>
-        </View>
+            <View style={styles.rightContainer}>
+                <Text style={fonts.regular}>{currency + ' ' + item.amount.toFixed(2)}</Text>
+            </View>
+        </>
     </TouchableOpacity>
 );
 

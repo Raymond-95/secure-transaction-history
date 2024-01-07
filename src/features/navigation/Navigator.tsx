@@ -10,10 +10,12 @@ import { palettes } from 'common/theme'
 
 import LoginScreen from 'features/auth/Login'
 import HistoryScreen from 'features/history/History'
+import TransctionDetails from 'features/history/TransctionDetails'
 
 export type RootStackParamsList = {
     Login: undefined
     History: undefined
+    TransctionDetails: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
@@ -35,6 +37,7 @@ const Navigator = () => {
             <Stack.Navigator initialRouteName="History" >
                 <Stack.Screen name="Login" component={LoginScreen} options={hideHeader} />
                 <Stack.Screen name="History" component={HistoryScreen} options={customHeader} />
+                <Stack.Screen name="TransctionDetails" component={TransctionDetails} options={customHeader} />
             </Stack.Navigator>
         </NavigationContainer>
     )
