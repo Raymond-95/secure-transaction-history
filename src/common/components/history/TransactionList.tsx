@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, FlatList } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Text, FlatList, ActivityIndicator } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import { NavigationService } from 'services/navigation/NavigationService'
@@ -16,11 +16,20 @@ const currency = 'RM'
 export const TransactionList = () => {
 
     const dispatch = useAppDispatch()
+    const isFetching = useSelector((state: RootStoreType) => state.transaction.isFetching)
     const transactionDetails = useSelector((state: RootStoreType) => state.transaction.transctionDetails)
 
     useEffect(() => {
         dispatch(getTransactionDetails())
     }, [])
+
+    if (isFetching) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator animating={true} size={'large'} />
+            </View>
+        )
+    }
 
     return (
         <FlatList
@@ -61,6 +70,11 @@ const FlatListItemSeparator = () => {
 }
 
 const styles = StyleSheet.create({
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     itemContainer: {
         flexDirection: 'row',
         padding: 10
