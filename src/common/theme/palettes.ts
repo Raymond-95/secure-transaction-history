@@ -5,5 +5,6 @@ export const palettes = {
     white: 'white',
     silver: 'silver',
     red: '#EA7268',
-    green: '#C4E299'
+    green: '#C4E299',
+    salmon: 'salmon'
 }

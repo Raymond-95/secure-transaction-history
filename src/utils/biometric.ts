@@ -2,6 +2,11 @@ import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
 import { Alert } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage'
 
+export interface BiometricResponse {
+    biometricEnabled: boolean
+    verified: boolean
+}
+
 const rnBiometrics = new ReactNativeBiometrics();
 
 export const registerBiometric = async (email: string, password: string) => {
@@ -52,7 +57,7 @@ export const registerBiometric = async (email: string, password: string) => {
     }
 }
 
-export const unlockWithBiometric = (email: string, password: string) => {
+export const unlockWithBiometric = () => {
 
     return new Promise(async (resolve, reject) => {
         try {
@@ -66,18 +71,29 @@ export const unlockWithBiometric = (email: string, password: string) => {
                 });
 
                 if (success) {
-                    resolve(true)
+                    resolve({
+                        biometricEnabled: true,
+                        verified: true
+                    })
                 }
                 else {
-                    reject('Failed to verify')
+                    // biometric is enabled for the app but failed to verify
+                    resolve({
+                        biometricEnabled: true,
+                        verified: false
+                    })
                 }
             }
             else {
-                registerBiometric(email, password)
-                resolve(true)
+                // biometric is not enable for the app
+                resolve({
+                    biometricEnabled: false,
+                    verified: false
+                })
             }
         } catch (error) {
-            reject(error.message)
+            // return error
+            reject(error)
         }
 
     })

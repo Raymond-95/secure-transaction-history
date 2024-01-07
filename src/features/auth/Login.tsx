@@ -10,7 +10,7 @@ import { CustomSafeAreaView, Heading1, CustomTextInput } from 'common/components
 import { loginImages } from 'common/assets/images';
 import { palettes } from 'common/theme';
 
-import { unlockWithBiometric } from 'utils'
+import { unlockWithBiometric, BiometricResponse, registerBiometric } from 'utils'
 interface Props {
   navigation: StackNavigationProp<RootStackParamsList, "Login">
 }
@@ -25,11 +25,17 @@ const loginSchema = Yup.object().shape({
 const Login = ({ navigation }: Props) => {
   const handleSubmit = async (values: { email: string; password: string }) => {
 
-    unlockWithBiometric(values.email, values.password)
-      .then(success => {
-        if (success) {
+    unlockWithBiometric()
+      .then((result: BiometricResponse) => {
+        if (result.biometricEnabled && result.verified) {
           // navigate to after login successfully
           navigation.navigate('History');
+        }
+        else if (result.biometricEnabled && !result.verified) {
+          throw new Error('Failed to verified')
+        }
+        else {
+          registerBiometric(values.email, values.password)
         }
       })
       .catch(error => {
