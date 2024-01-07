@@ -38,6 +38,7 @@ export const CustomTextInput = ({
                 }}
                 placeholder={placeholder}
                 placeholderTextColor={placeholderTextColor}
+                secureTextEntry={secureTextEntry}
                 onChangeText={onChangeText}
                 onBlur={onBlur}
                 onFocus={onFocus}

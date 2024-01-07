@@ -20,8 +20,6 @@ const loginSchema = Yup.object().shape({
   password: Yup.string().min(8, 'password is too short').required('password is required'),
 });
 
-
-
 const Login = ({ navigation }: Props) => {
   const handleSubmit = async (values: { email: string; password: string }) => {
 
@@ -57,7 +55,7 @@ const Login = ({ navigation }: Props) => {
           validationSchema={loginSchema}
           onSubmit={handleSubmit}
         >
-          {({ handleChange, handleBlur, setErrors, handleSubmit, values, errors }) => (
+          {({ handleChange, handleBlur, setErrors, handleSubmit, values, errors, touched }) => (
             <View>
               <CustomTextInput
                 placeholder={'email address'}
@@ -66,7 +64,7 @@ const Login = ({ navigation }: Props) => {
                 onBlur={handleBlur('email')}
                 onFocus={() => setErrors({ email: null })}
                 value={values.email}
-                error={errors.email}
+                error={(touched.email && errors.email) ? errors.email : undefined}
               />
 
               <CustomTextInput
@@ -77,7 +75,7 @@ const Login = ({ navigation }: Props) => {
                 onFocus={() => setErrors({ password: null })}
                 value={values.password}
                 secureTextEntry={true}
-                error={errors.password}
+                error={(touched.password && errors.password) ? errors.password : undefined}
               />
 
               <TouchableOpacity style={styles.submitBtnStyle} onPress={handleSubmit}>
