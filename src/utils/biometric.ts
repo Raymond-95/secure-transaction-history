@@ -1,6 +1,7 @@
 import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
 import { Alert } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage'
+import { NavigationService } from 'services/navigation/NavigationService';
 
 export interface BiometricResponse {
     biometricEnabled: boolean
@@ -28,7 +29,7 @@ export const registerBiometric = async (email: string, password: string) => {
             'Biometric',
             'Would you like to enable biometric authentication for the next time?',
             [
-                { text: 'Cancel', style: 'cancel' },
+                { text: 'Cancel', style: 'cancel', onPress:() => NavigationService.navigate('History') },
                 {
                     text: 'Yes',
                     onPress: async () => {
@@ -47,6 +48,8 @@ export const registerBiometric = async (email: string, password: string) => {
                                     publicKey: publicKey
                                 })
                             );
+
+                            NavigationService.navigate('History')
                         } catch (error) {
                             Alert.alert(error.message)
                         }
