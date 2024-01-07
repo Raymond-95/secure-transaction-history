@@ -30,7 +30,7 @@ const customHeader = {
 const Navigator = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
+            <Stack.Navigator initialRouteName="History">
                 <Stack.Screen name="Login" component={LoginScreen} options={hideHeader}/>
                 <Stack.Screen name="History" component={HistoryScreen} options={customHeader}/>
             </Stack.Navigator>

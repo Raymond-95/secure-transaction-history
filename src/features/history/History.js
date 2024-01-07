@@ -1,18 +1,19 @@
-import { StyleSheet, FlatList } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
-import { CustomSafeAreaView } from 'common/components'
+import { CustomSafeAreaView, TransactionList } from 'common/components'
 
 const History = ({ navigation }) => {
 
     return (
         <CustomSafeAreaView>
-
+            <View>
+                <TransactionList  />
+            </View>
         </CustomSafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-
 })
 
 export default History;

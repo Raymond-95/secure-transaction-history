@@ -1,4 +1,5 @@
 export * from './CustomSafeAreaView'
+export * from './history/TransactionList'
 export * from './CustomTextInput'
 
 /**
