@@ -27,6 +27,7 @@ export const client = {
         return util.throwOnError<T>(res)
     },
     post: async <T>(...args: postArgs) => {
+        console.log(instance)
         const res = await instance.post(...args) as ApiResponse<T>
         return util.throwOnError<T>(res)
     },
@@ -47,7 +48,7 @@ const util = {
         if (!response.ok) {
             const error = new HttpException(
                 response.status || 'unknown',
-                response.data.error,
+                response.data,
                 response.config?.url || 'unknown',
                 response)
 

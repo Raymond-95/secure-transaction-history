@@ -1,6 +1,8 @@
 import { combineReducers } from "redux"
-import { transctionDetailsSlice } from 'redux/slices/transactionSlice'
+import { transctionDetailsReducer } from 'redux/slices/transactionSlice'
 
 export const rootReducer = combineReducers({
-    transaction: transctionDetailsSlice
+    transaction: transctionDetailsReducer
 })
+
+export type RootStoreType = ReturnType<typeof rootReducer>

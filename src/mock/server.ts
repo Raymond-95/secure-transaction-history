@@ -1,14 +1,19 @@
-import { createServer } from "miragejs"
-import { TransactionData } from 'mock/transactionData'
+import { createServer } from "miragejs";
+import { TransactionData } from 'mock/transactionData';
 
 export const makeServer = () => {
   return createServer({
     routes() {
-      this.namespace = "api"
-
-      this.post("/retrieveTransactionData", (schema, request) => {
-        return { transactionData: TransactionData }
-      })
-    }
-  })
+       // Set a urlPrefix to handle requests with "/api" prefix
+       this.namespace = "/api";
+       this.urlPrefix = 'http://localhost:8081';
+       this.post("/retrieveTransactionData", (schema, request) => {
+         // Handle the POST request logic here
+         return {
+           status: "success",
+           data: { transactionData: TransactionData },
+         };
+       });
+    },
+  });
 };

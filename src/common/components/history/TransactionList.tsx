@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import { NavigationService } from 'services/navigation/NavigationService'
 import { useAppDispatch } from 'redux/hooks'
 import { getTransactionDetails } from 'redux/slices/transactionSlice'
+import { RootStoreType } from "redux/rootReducer"
 
 import { TransactionData } from 'mock/transactionData'
 import { TransctionType } from 'models'
@@ -14,25 +16,22 @@ const currency = 'RM'
 export const TransactionList = () => {
 
     const dispatch = useAppDispatch()
+    const transactionDetails = useSelector((state: RootStoreType) => state.transaction.transctionDetails)
 
     useEffect(() => {
         dispatch(getTransactionDetails())
-    })
+    }, [])
 
     return (
         <FlatList
-            data={TransactionData}
+            data={transactionDetails}
             renderItem={({ item, index }) => <Item key={index} item={item} />}
             keyExtractor={item => item.id.toString()}
             ItemSeparatorComponent={FlatListItemSeparator}
-            onRefresh={onRefresh}
+            onRefresh={() => dispatch(getTransactionDetails())}
             refreshing={false}
         />
     )
-}
-
-const onRefresh = () => {
-
 }
 
 const Item = ({ item }) => (

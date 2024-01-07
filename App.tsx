@@ -14,11 +14,9 @@ import { makeServer } from 'mock/server'
 
 function App(): React.JSX.Element {
 
-  // if (
-  //   process.env.NODE_ENV === 'development'
-  // ) {
-  //   makeServer();
-  // }
+  if (process.env.NODE_ENV === 'development') {
+    makeServer();
+  }
 
   return (
     <Provider store={store}>

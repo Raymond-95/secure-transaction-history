@@ -6,6 +6,9 @@ export interface GenericResponse {
 }
 
 export interface TransactionDataResponse {
-    data: [TransactionDataModel]
+    status: string
+    data: {
+        transactionData: [TransactionDataModel]
+    }
 }
 
