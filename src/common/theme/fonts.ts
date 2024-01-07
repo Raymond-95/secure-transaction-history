@@ -25,5 +25,8 @@ export const fonts = StyleSheet.create({
         fontWeight: 'bold',
         fontStyle: 'normal',
         color: palettes.black
+    },
+    whiteFont: {
+        color: palettes.white
     }
 })
