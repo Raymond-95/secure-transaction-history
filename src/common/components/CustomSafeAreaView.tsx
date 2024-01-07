@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
     innerContainer: {
         flex: 1,
         backgroundColor: palettes.white,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         padding: 20
     }
 })
