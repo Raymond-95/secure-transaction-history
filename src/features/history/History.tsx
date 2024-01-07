@@ -1,13 +1,20 @@
+import { StackNavigationProp } from "@react-navigation/stack"
+import { RootStackParamsList } from "features/navigation/Navigator"
+
 import { StyleSheet, View } from 'react-native'
 
 import { CustomSafeAreaView, TransactionList } from 'common/components'
 
-const History = ({ navigation }) => {
+interface Props {
+    navigation: StackNavigationProp<RootStackParamsList, "History">
+}
+
+const History = ({ navigation }: Props) => {
 
     return (
         <CustomSafeAreaView>
             <View>
-                <TransactionList  />
+                <TransactionList />
             </View>
         </CustomSafeAreaView>
     )

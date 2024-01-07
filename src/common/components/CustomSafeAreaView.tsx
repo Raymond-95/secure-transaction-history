@@ -4,7 +4,7 @@ import { StyleSheet, SafeAreaView, View } from 'react-native'
 import { palettes } from 'common/theme'
 
 interface CustomSafeAreaViewProps {
-    normalView: boolean,
+    normalView?: boolean,
     children: React.ReactNode
 }
 

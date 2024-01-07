@@ -21,7 +21,9 @@
                     "@features": "./src/features",
                     "@models": "./src/models",
                     "@redux": "./src/redux",
-                    "@common": "./src/common"
+                    "@common": "./src/common",
+                    "@services": "./src/services",
+                    "@mock": "./src/mock"
                 }
             }
         ]

@@ -17,7 +17,7 @@ export const TransactionList = () => {
 }
 
 const Item = ({ item }) => (
-    <TouchableOpacity style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={() => {}}>
         <View style={styles.leftContainer}>
             <Text style={fonts.regularBoldTitle}>{item.recipient_name}</Text>
             <View style={[styles.typeContainer, item.type === 'debit' ? { backgroundColor: palettes.red } : { backgroundColor: palettes.green }]}>
