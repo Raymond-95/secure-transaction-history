@@ -22,7 +22,7 @@ const Login = ({ navigation }) => {
     }
 
     return (
-        <CustomSafeAreaView>
+        <CustomSafeAreaView normalView={true}>
             <View style={styles.imgContainerStyle}>
                 <Image style={styles.logoStyle} source={loginImages.logoIcon} resizeMode='contain' />
             </View>

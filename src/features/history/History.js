@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 
 import { CustomSafeAreaView } from 'common/components'
 
