@@ -1,7 +1,9 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, FlatList } from 'react-native'
 
 import { NavigationService } from 'services/navigation/NavigationService'
+import { useAppDispatch } from 'redux/hooks'
+import { getTransactionDetails } from 'redux/slices/transactionSlice'
 
 import { TransactionData } from 'mock/transactionData'
 import { TransctionType } from 'models'
@@ -10,14 +12,27 @@ import { palettes, fonts } from 'common/theme';
 const currency = 'RM'
 
 export const TransactionList = () => {
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getTransactionDetails())
+    })
+
     return (
         <FlatList
             data={TransactionData}
             renderItem={({ item, index }) => <Item key={index} item={item} />}
             keyExtractor={item => item.id.toString()}
             ItemSeparatorComponent={FlatListItemSeparator}
+            onRefresh={onRefresh}
+            refreshing={false}
         />
     )
+}
+
+const onRefresh = () => {
+
 }
 
 const Item = ({ item }) => (

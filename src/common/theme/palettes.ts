@@ -1,5 +1,6 @@
 export const palettes = {
     primaryColor: '#525092',
+    black: 'black',
     lightgrey: 'lightgrey',
     white: 'white',
     silver: 'silver',

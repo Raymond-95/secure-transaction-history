@@ -38,21 +38,27 @@ const Login = ({ navigation }: Props) => {
           validationSchema={loginSchema}
           onSubmit={handleSubmit}
         >
-          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+          {({ handleChange, handleBlur, setErrors, handleSubmit, values, errors }) => (
             <View>
               <CustomTextInput
                 placeholder={'email address'}
+                placeholderTextColor={palettes.lightgrey}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
+                onFocus={() => setErrors({email: null})}
                 value={values.email}
+                error={errors.email}
               />
 
               <CustomTextInput
                 placeholder={'password'}
+                placeholderTextColor={palettes.lightgrey}
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
+                onFocus={() => setErrors({password: null})}
                 value={values.password}
                 secureTextEntry={true}
+                error={errors.password}
               />
 
               <TouchableOpacity style={styles.submitBtnStyle} onPress={handleSubmit}>

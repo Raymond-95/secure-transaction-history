@@ -34,7 +34,7 @@ const Navigator = () => {
     }, [])
     return (
         <NavigationContainer ref={navigationRef}>
-            <Stack.Navigator initialRouteName="History" >
+            <Stack.Navigator initialRouteName="Login" >
                 <Stack.Screen name="Login" component={LoginScreen} options={hideHeader} />
                 <Stack.Screen name="History" component={HistoryScreen} options={customHeader} />
                 <Stack.Screen name="TransctionDetails" component={TransctionDetails} options={customHeader} />
