@@ -1,6 +1,6 @@
 import { client } from 'services/network/ApiService'
 import { routes } from 'services/network/routes'
-import { TransactionDataResponse } from 'services/network/models'
+import { TransactionDataResponse } from 'services/network/responseModels'
 
 // API implementation
 export const apis = {

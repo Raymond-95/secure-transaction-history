@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { TransactionDataModel } from 'models'
 
 import { ApiService } from "services/network/ApiService"
-import { TransactionDataResponse } from "services/network/models"
+import { TransactionDataResponse } from "services/network/responseModels"
 
 interface TransactionDetails {
     isFetching: boolean
@@ -35,6 +35,8 @@ export const getTransactionDetails = createAsyncThunk(
             dispatch(transctionDetailsSlice.actions.setIsFetching(true));
 
             const result: TransactionDataResponse = await ApiService.apis.getTransactionUrl();
+
+            console.log(result)
 
             if (result.status === 'success') {
                 // Assuming result.data.transactionData is the array you want to update

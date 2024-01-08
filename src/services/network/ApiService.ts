@@ -1,9 +1,11 @@
 import { ApisauceInstance, ApiResponse } from 'apisauce'
+import { AxiosError } from 'axios';
 
 import { instance } from 'services/network/setup'
 import { routes } from 'services/network/routes'
 import { apis } from 'services/network/implementations/apis'
 import HttpException from 'common/exceptions/HttpException'
+import { UnauthorizedException, TimeoutException } from 'common/exceptions/HttpException'
 
 type getArgs = Parameters<ApisauceInstance['get']>
 type postArgs = Parameters<ApisauceInstance['post']>
@@ -27,7 +29,6 @@ export const client = {
         return util.throwOnError<T>(res)
     },
     post: async <T>(...args: postArgs) => {
-        console.log(instance)
         const res = await instance.post(...args) as ApiResponse<T>
         return util.throwOnError<T>(res)
     },
@@ -53,6 +54,15 @@ const util = {
                 response)
 
             __DEV__ && console.log(error)
+
+            // Handle timeout errors
+            if (error instanceof AxiosError && error.code === 'ECONNABORTED') {
+                throw new TimeoutException('Request timed out');
+            }
+            // Handle unauthorized access (401) separately
+            else if (response.status === 401) {
+                throw new UnauthorizedException('Unauthorized access');
+            }
 
             throw error
         } else {
