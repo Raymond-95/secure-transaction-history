@@ -1,3 +1,4 @@
+import { Alert } from 'react-native'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { TransactionDataModel } from 'models'
 
@@ -7,11 +8,13 @@ import { TransactionDataResponse } from "services/network/responseModels"
 interface TransactionDetails {
     isFetching: boolean
     transctionDetails: Array<TransactionDataModel>
+    error?: string
 }
 
 const initialState: TransactionDetails = {
     isFetching: false,
-    transctionDetails: []
+    transctionDetails: [],
+    error: null
 }
 
 export const transctionDetailsSlice = createSlice({
@@ -22,7 +25,12 @@ export const transctionDetailsSlice = createSlice({
             state.isFetching = action.payload;
         },
         setTransactionDetails: (state, action) => {
+            state.isFetching = false
             state.transctionDetails = action.payload;
+        },
+        setTransactionDetailsError: (state, action) => {
+            state.isFetching = false
+            state.error = action.payload;
         }
     }
 })
@@ -31,9 +39,6 @@ export const getTransactionDetails = createAsyncThunk(
     'transctionDetails/getTransactionDetails',
     async (_, { dispatch, getState }) => {
         try {
-            // Set isFetching to true before the API call
-            dispatch(transctionDetailsSlice.actions.setIsFetching(true));
-
             const result: TransactionDataResponse = await ApiService.apis.getTransactionUrl();
 
             console.log(result)
@@ -43,14 +48,14 @@ export const getTransactionDetails = createAsyncThunk(
                 dispatch(transctionDetailsSlice.actions.setTransactionDetails(result.data.transactionData));
             } else {
                 // Handle the case where the API request fails
+                dispatch(transctionDetailsSlice.actions.setTransactionDetailsError(result.data));
             }
-
-            // Set isFetching to false after the API call
-            dispatch(transctionDetailsSlice.actions.setIsFetching(false));
         } catch (error) {
             console.error('Error fetching data:', error);
+
+            Alert.alert('Error', error._message.message)
             // Handle the error if needed
-            dispatch(transctionDetailsSlice.actions.setIsFetching(false));
+            dispatch(transctionDetailsSlice.actions.setTransactionDetailsError(error.message));
         }
     }
 );

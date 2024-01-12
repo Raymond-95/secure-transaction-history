@@ -15,7 +15,7 @@ export const makeServer = () => {
          };
 
         // // throw specific error code
-        // return new Response(400, {}, { error: 'Bad Request' });
+        // return new Response(400, {}, { message: 'Bad Request' });
       });
     },
   });
