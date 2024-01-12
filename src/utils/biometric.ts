@@ -20,7 +20,16 @@ export const registerBiometric = async (email: string, password: string) => {
         Alert.alert(
             'Opps!',
             'Face ID is not available on this device.',
+            [
+                {
+                    text: 'OK',
+                    onPress: () => {
+                        NavigationService.navigate('History')
+                    },
+                }
+            ]
         );
+
         return;
     }
 
@@ -29,7 +38,7 @@ export const registerBiometric = async (email: string, password: string) => {
             'Biometric',
             'Would you like to enable biometric authentication for the next time?',
             [
-                { text: 'Cancel', style: 'cancel', onPress:() => NavigationService.navigate('History') },
+                { text: 'Cancel', style: 'cancel', onPress: () => NavigationService.navigate('History') },
                 {
                     text: 'Yes',
                     onPress: async () => {
